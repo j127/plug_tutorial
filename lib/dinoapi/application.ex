@@ -4,16 +4,15 @@ defmodule Dinoapi.Application do
   @moduledoc false
 
   use Application
+  require Logger
 
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Dinoapi.Worker.start_link(arg)
-      # {Dinoapi.Worker, arg}
+      {Plug.Cowboy, scheme: :http, plug: Dinoapi.SalutonMondoPlug, options: [port: 4444]}
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Dinoapi.Supervisor]
+    Logger.info("starting application")
     Supervisor.start_link(children, opts)
   end
 end
