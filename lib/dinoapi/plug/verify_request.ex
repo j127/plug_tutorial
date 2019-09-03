@@ -3,7 +3,7 @@ defmodule Dinoapi.Plug.VerifyRequest do
     @moduledoc """
     Error raised when a required field is missing.
     """
-    defexception message: ""
+    defexception message: "", plug_status: 400
   end
 
   def init(options), do: options

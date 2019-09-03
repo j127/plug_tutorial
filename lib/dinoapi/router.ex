@@ -1,5 +1,9 @@
 defmodule Dinoapi.Router do
   use Plug.Router
+
+  # tos looks for a handle_errors/2 function
+  use Plug.ErrorHandler
+
   alias Dinoapi.Plug.VerifyRequest
 
   plug Plug.Parsers, parsers: [:urlencoded, :multipart]
@@ -20,5 +24,12 @@ defmodule Dinoapi.Router do
 
   match _ do
     send_resp(conn, 404, "404 ne trovita")
+  end
+
+  defp handle_errors(conn, %{kind: kind, reason: reason, stack: stack}) do
+    IO.inspect(kind, label: :kind)
+    IO.inspect(reason, label: :reason)
+    IO.inspect(stack, label: :stack)
+    send_resp(conn, conn.status, "something went wrong")
   end
 end
