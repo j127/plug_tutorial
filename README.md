@@ -1,6 +1,8 @@
 # Dinoapi
 
-**TODO: Add description**
+From [this tutorial](https://elixirschool.com/en/lessons/specifics/plug/).
+
+TODO: combine with the Ecto tutorial.
 
 ## Installation
 
